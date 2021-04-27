@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #eee;
+  color: #111;
+}
+
+.draggable-elements {
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+}
+
+/*For the icons to be dragged*/
+.draggable {
+  height: 5rem;
+  width: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  margin: 0rem 0.5rem;
+  cursor: move;
+  /* cursor is set to move the draggable elements */
+  transition: opacity 0.2s;
+}
+
+.draggable:hover {
+  opacity: 0.5;
+}
+
+.droppable {
+  height: 6.5rem;
+  width: 6.5rem;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+  background-color: #fff;
+  border: 3px dashed #111;
+  transition: border-width 0.2s, transform 0.2s, background-color 0.4s;
+}
+
+.droppable span {
+  font-size: 1.25rem;
+  pointer-events: none;
+  /* VVIMP => The element is never the target of pointer events
+  when the drag eneters into the span area, we dont want any events to happen on the current state of the span
+  i.e to the text here for eg.Frog is the span
+  we are only intersted what happens to the parent element i.e. draggable*/
+}
+
+/* Drag and Drop Related Styling */
+.droppable.droppable-hover {
+  /* when draggable elements enter the droppable area,the droppable-hover class will be added over The
+  droppable class increasing the bordere width and the scale  */
+  border-width: 5px;
+  transform: scale(1.1);
+}
+
+.droppable.dropped {
+  /*when the correct draggable element is dropped over the corresponding droppable
+  the dropped class will added over the droppable element changing border to solid and color to white
+  and the background-color matching to the draggable element using the JS*/
+  border-style: solid;
+  color: #fff;
+}
+
+.droppable.dropped span {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.droppable.dropped i {
+  /* the icon will be connected to the droppable using the javascript*/
+  pointer-events: none;
+}
+
+.draggable.dragged {
+  /*As soon as the draggable element is dropped, we add dragged class to it
+  setting user select to none to show that the dragged element is no longer available to choose*/
+  user-select: none;
+  opacity: 0.1;
+  cursor: default;
+}
+
+.draggable.dragged:hover {
+  opacity: 0.1;
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 14px;
+  }
+
+  .draggable-elements {
+    margin: 1.5rem;
+  }
+}
